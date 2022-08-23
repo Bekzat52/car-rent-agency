@@ -5,7 +5,7 @@ from cars.views import *
 
 
 urlpatterns = [
-    path('car/create/', CarCreateView.as_view()),
-    path('car/all_list/', CarListView.as_view()),
-    path('car/detail/<int:pk>/', CarDetailView.as_view()),
+    path('create/', CarCreateView.as_view()),
+    path('all_list/', CarListView.as_view()),
+    path('detail/<int:pk>/', CarDetailView.as_view()),
 ]
