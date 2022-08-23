@@ -34,5 +34,5 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('docs/', schema_view.with_ui('swagger')),
     path('api/v1/base-auth/', include('rest_framework.urls')),
-    path('api/v1/cars/', include('cars.urls'))
+    path('api/v1/cars/', include('cars.urls')),
 ]

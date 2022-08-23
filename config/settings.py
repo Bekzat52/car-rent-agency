@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'car',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
 
 ]
 
@@ -88,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASS'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': 5432
     }
