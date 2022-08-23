@@ -20,7 +20,6 @@ from drf_yasg.views import get_schema_view
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 schema_view = get_schema_view(
     openapi.Info(
         title = 'Car sharing "АЙДА" API',
@@ -34,4 +33,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('docs/', schema_view.with_ui('swagger')),
+    path('api/v1/base-auth/', include('rest_framework.urls')),
+    path('api/v1/cars/', include('cars.urls')),
 ]
