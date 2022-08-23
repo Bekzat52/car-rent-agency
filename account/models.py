@@ -1,7 +1,8 @@
-from lib2to3.pytree import Base
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
+from rest_framework.response import Response
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -58,3 +59,4 @@ class User(AbstractUser):
         activation_url = f'http://127.0.0.1:8000/account/activate/{self.activation_code}'
         message = f'Активируйте свой аккаунт пройдя по этой ссылке {activation_url}'
         send_mail('Activate account', message, 'cars@gmail.com', [self.email])
+        return Response ("На вашу почту отправлена ссылка для активации аккаунта.")

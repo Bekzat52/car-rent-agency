@@ -45,7 +45,20 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
 
+
 ]
+
+
+AUTHENTICATION_BACKENDS = (
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+# ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_ON_GET = True
+
+
 
 MIDDLEWARE = [
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -163,11 +176,3 @@ SWAGGER_SETTINGS = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
-EMAIL_HOST = 'smtp.gmail.com'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS   = True
-ACTIVATE_USERS_EMAIL = True
-EMAIL_USE_SSL = False

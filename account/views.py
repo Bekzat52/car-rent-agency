@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import  get_object_or_404
-
 from .serializers import RegisterSerializer
 
 User = get_user_model()
@@ -25,3 +24,4 @@ def activate(request, activation_code):
     user.activation_code = ''
     user.save()
     return redirect('http://127.0.0.1:3000/')
+
