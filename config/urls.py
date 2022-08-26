@@ -34,5 +34,8 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('docs/', schema_view.with_ui('swagger')),
     path('api/v1/base-auth/', include('rest_framework.urls')),
-    path('api/v1/cars/', include('cars.urls')),
+    path('cars/', include('cars.urls')),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
