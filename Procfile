@@ -1,1 +1,1 @@
-gunicorn main_app.wsgi
+gunicorn config.wsgi
