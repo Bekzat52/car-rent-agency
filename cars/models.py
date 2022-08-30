@@ -61,4 +61,3 @@ class Rating(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
     product = models.ForeignKey(Car, related_name='likes', on_delete=models.CASCADE)
-

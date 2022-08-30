@@ -20,6 +20,7 @@ from drf_yasg.views import get_schema_view
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 schema_view = get_schema_view(
     openapi.Info(
         title = 'Car sharing "АЙДА" API',

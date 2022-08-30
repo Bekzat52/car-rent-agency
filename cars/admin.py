@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import Car, Category, Like, Rating
 
 
