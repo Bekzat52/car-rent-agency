@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'account',
-    'car',
+    'cars',
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
@@ -50,9 +50,6 @@ INSTALLED_APPS = [
 ]
 
 
-AUTHENTICATION_BACKENDS = (
-    "allauth.account.auth_backends.AuthenticationBackend",
-)
 
 SITE_ID = 1
 # ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -177,3 +174,22 @@ SWAGGER_SETTINGS = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER='beka20janybekuulu01@gmail.com'
+EMAIL_HOST_PASSWORD='yvmgxvwxtzugexhq'
+EMAIL_PORT = 587
+
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = '6379'
+
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

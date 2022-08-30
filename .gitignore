@@ -1,3 +1,5 @@
 __pycahce__/
 venv/
 .env
+cars/
+settings.py 

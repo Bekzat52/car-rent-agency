@@ -1,4 +1,3 @@
-from webbrowser import get
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
@@ -6,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import  get_object_or_404
 from .serializers import RegisterSerializer
+from .tasks import send_activation_code
 
 User = get_user_model()
 
@@ -15,6 +15,7 @@ class RegisterAPIView(APIView):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
+            # send_activation_code.delay(request.user.email)
             return Response('Account created', 201)
             
 @api_view(['GET'])
