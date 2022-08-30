@@ -42,7 +42,23 @@ class Car(models.Model):
     price = models.DecimalField(verbose_name="Цена", max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, blank=True, verbose_name='Пользователь', on_delete=models.CASCADE)
 
+    @property
+    def get_average_rating(self):
+        ratings = [rating.value for rating in self.ratings.all()]
+        if ratings:
+            return sum(ratings) / len(ratings)
+        return 0
+
     def __str__(self):
         return f'{self.mark} {self.model}'
 
+class Rating(models.Model):
+    user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)
+    product = models.ForeignKey(Car, related_name='ratings', on_delete=models.CASCADE)
+    value = models.IntegerField(choices=[(1,1), (2,2), (3,3), (4,4), (5,5)])
+    
+
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
+    product = models.ForeignKey(Car, related_name='likes', on_delete=models.CASCADE)
 
