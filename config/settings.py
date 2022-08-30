@@ -25,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if config('DEBUG') == '1' else False
+# DEBUG = True if config('DEBUG') == '1' else False
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
@@ -97,26 +98,26 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DEBUG == False:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': 'localhost',
-            'PORT': 5432
-        }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': config('DB_NAME'),
+#             'USER': config('DB_USER'),
+#             'PASSWORD': config('DB_PASSWORD'),
+#             'HOST': 'localhost',
+#             'PORT': 5432
+#         }
+#     }
+# else:
+import dj_database_url
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql'
     }
-else:
-    import dj_database_url
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql'
-        }
-    } 
-    db = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'].update(db)
+} 
+db = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db)
 
 
 # Password validation
