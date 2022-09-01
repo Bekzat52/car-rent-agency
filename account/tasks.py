@@ -1,18 +1,13 @@
 from celery import shared_task
 from django.core.mail import send_mail
-
-
-def generate_activation_code(self):
-        from django.utils.crypto import get_random_string
-        code = get_random_string(length=8, allowed_chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
-        self.activation_code = code 
-        self.save()
+from django.dispatch import receiver
+from django.urls import reverse
+from password_reset.signals import reset_password_token_created
 
 @shared_task
-def send_activation_code(self):
-        generate_activation_code()
-        activation_url = f'http://127.0.0.1:8000/account/activate/{self.activation_code}'
-        message = f'Активируйте свой аккаунт пройдя по этой ссылке {activation_url}'
-        send_mail('Активация аккаунта', message, 'cars@gmail.com', [self.email])
-
+def send_code(activation_code, email):
+    activation_url = f'http://127.0.0.1:8000/account/activate/{activation_code}'
+    message = f'Активируйте свой аккаунт пройдя по этой ссылке {activation_url}'
+    send_mail('Активация аккаунта', message, 'cars@gmail.com', [email])
+    return "send"
 

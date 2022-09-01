@@ -6,6 +6,9 @@ pillow
 drf-yasg
 python-decouple 
 whitenoise
+gunicorn
 celery
 redis
-
+dj-database-url
+django-celery-results
+django-cors-headers

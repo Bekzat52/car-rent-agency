@@ -42,13 +42,15 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'corsheaders',
 
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'password_reset',
+    'drf_yasg',
+    'django_celery_results',
+
     'account',
     'cars',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'drf_yasg',
-
-
 ]
 
 
@@ -97,7 +99,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DEBUG == False:
+if DEBUG :
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -154,7 +156,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -183,6 +185,9 @@ SIMPLE_JWT = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
@@ -226,7 +231,7 @@ CORS_ORIGIN_WHITELIST = [
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = '6379'
 
-
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
