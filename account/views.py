@@ -26,3 +26,6 @@ def activate(request, activation_code):
     user.save()
     return redirect('http://127.0.0.1:3000/')
 
+
+# def get_user_by_id_view(request):
+#     return get_user_by_id(request.id)

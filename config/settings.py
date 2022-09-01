@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_filters',
 
 
 ]
@@ -98,7 +99,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DEBUG == False:
+if DEBUG:   #for local
+# if DEBUG == False:    #for deploy
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -183,6 +185,7 @@ SIMPLE_JWT = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS':('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
@@ -221,7 +224,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3001', 
     'https://www.thunderclient.com',
 ]
-
+    
 
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = '6379'

@@ -37,10 +37,11 @@ class Car(models.Model):
     body = models.CharField(verbose_name="Кузов", choices=CAR_TYPES, max_length=50)
     color = models.CharField(verbose_name="Цвет", max_length=30)
     hand = models.CharField(verbose_name="Руль", choices=HAND, max_length=50)
-    engine = models.FloatField(verbose_name="Обьем пример:1,8")
-    image = models.ImageField()
+    engine = models.FloatField(verbose_name="Обьем")
+    image = models.ImageField(blank = True)
     price = models.DecimalField(verbose_name="Цена", max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, blank=True, verbose_name='Пользователь', on_delete=models.CASCADE)
+
 
     @property
     def get_average_rating(self):
@@ -50,7 +51,7 @@ class Car(models.Model):
         return 0
 
     def __str__(self):
-        return f'{self.mark} {self.model}'
+        return f'{self.mark} {str(self.model).title()} {str(self.color).title()}'
 
 class Rating(models.Model):
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)

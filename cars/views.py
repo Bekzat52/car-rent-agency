@@ -8,6 +8,10 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
+import django_filters.rest_framework
+
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class CarAPIListPagination(PageNumberPagination):
@@ -18,10 +22,14 @@ class CarAPIListPagination(PageNumberPagination):
 class CarCreateView(generics.CreateAPIView):
     serializer_class = CarDetailSerializer
 
+from .services import CarFilter
+
 class CarListView(generics.ListAPIView):
     serializer_class = CarListSerializer
     queryset = Car.objects.all()
     pagination_class = CarAPIListPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['model']
 
 class CarDetailView(generics.RetrieveDestroyAPIView):
     serializer_class = CarDetailSerializer
