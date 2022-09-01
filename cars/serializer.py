@@ -2,6 +2,10 @@ from rest_framework import serializers
 from cars.models import Car, Category, Like, Rating
 
 
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        exclude = ['id']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,6 +27,7 @@ class CarDetailSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['category'] = CategorySerializer(instance.category).data
+        rep['ratings'] = instance.get_average_rating
         return rep
 
 
