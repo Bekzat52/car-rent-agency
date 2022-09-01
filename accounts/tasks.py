@@ -1,8 +1,5 @@
 from celery import shared_task
 from django.core.mail import send_mail
-from django.dispatch import receiver
-from django.urls import reverse
-from password_reset.signals import reset_password_token_created
 
 @shared_task
 def send_code(activation_code, email):

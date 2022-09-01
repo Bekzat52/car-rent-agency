@@ -32,10 +32,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include('account.urls')),
+    path('account/', include('accounts.urls')),
     path('docs/', schema_view.with_ui('swagger')),
     path('api/v1/base-auth/', include('rest_framework.urls')),
     path('cars/', include('cars.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

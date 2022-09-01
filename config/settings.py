@@ -50,7 +50,13 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_celery_results',
 
-    'account',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
+    'accounts',
     'cars',
     'django_filters',
 ]
@@ -59,7 +65,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 # ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_REDIRECT_URL = "home"
+# LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_ON_GET = True
 
 
@@ -90,6 +96,8 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -179,7 +187,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 
 
@@ -244,3 +252,10 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
