@@ -102,8 +102,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-if DEBUG:   #for local
-# if DEBUG == False:    #for deploy
+# if DEBUG:   #for local 
+if DEBUG == False:    #for deploy
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
