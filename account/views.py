@@ -11,10 +11,12 @@ from .tasks import send_code
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework import generics
+from drf_yasg.utils import swagger_auto_schema
 
 User = get_user_model()
 
 class RegisterAPIView(APIView):
+    @swagger_auto_schema(request_body=RegisterSerializer())
     
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
